@@ -1,12 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './Components/NavBar';
+import Home from './Components/Home';
 
-function App() {
+const App = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
   return (
-    <div className="App">
-
-    </div>
+    <Router>
+      <div>
+        <Navbar/>
+        <Routes>
+          <Route exact path="/" component={<Home />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
