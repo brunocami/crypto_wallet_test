@@ -1,0 +1,155 @@
+.wallet_container {
+    display: grid;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    grid-template-columns: 25% 25% 25% 25%;
+    height: 100%;
+}
+
+.wallet_container h1 {
+    grid-column-start: 1;
+    margin-left: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+.wallet_card_container {
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: 1/3 1/3 1/3;
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+/* CARD CSS */
+
+
+
+
+
+.card_container {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.25);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    padding: 20px;
+    width: 25%;
+    margin: 10px auto;
+    filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.banner-image-bitcoin {
+    background-image: url('../../../public/images/Bitcoin-Logo.png');
+    background-position: center;
+    background-size: cover;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    border-radius: 12px;
+}
+
+.banner-image-ethereum {
+    background-image: url('../../../public/images/Ethereum-Logo.png');
+    background-position: center;
+    background-size: cover;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    border-radius: 12px;
+}
+
+.banner-image-ripple {
+    background-image: url('../../../public/images/Ripple-Logo.png');
+    background-position: center;
+    background-size: cover;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    border-radius: 12px;
+}
+
+h2 {
+    font-family: 'Righteous', sans-serif;
+    color: rgba(255, 255, 255, 0.98);
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+
+.wrapper p {
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 150%;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.wallet_url {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    background-color: #4646468e;
+    border-radius: 4px;
+    margin: auto;
+    padding: 0px 5px;
+}
+
+.button-wrapper {
+    margin-top: 18px;
+}
+
+.btn {
+    border: none;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 12px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.btn+.btn {
+    margin-left: 10px;
+}
+
+.outline {
+    background: transparent;
+    color: rgba(255, 0, 17, 0.9);
+    border: 1px solid rgba(255, 0, 17, 0.6);
+    transition: all .3s ease;
+
+}
+
+.outline:hover {
+    transform: scale(1.125);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.9);
+    transition: all .3s ease;
+}
+
+.fill {
+    background: rgba(26, 255, 0, 0.9);
+    color: rgba(255, 255, 255, 0.95);
+    filter: drop-shadow(0);
+    font-weight: bold;
+    transition: all .3s ease;
+}
+
+.fill:hover {
+    transform: scale(1.125);
+    border-color: rgba(255, 255, 255, 0.9);
+    filter: drop-shadow(0 10px 5px rgba(0, 0, 0, 0.125));
+    transition: all .3s ease;
+}
