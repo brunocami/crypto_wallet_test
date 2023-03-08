@@ -1,0 +1,37 @@
+.nav_section_list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-decoration: none;
+    list-style: none;
+    padding: 0px;
+  }
+
+  .nav_section_list li {
+    display: flex;
+    background-color: transparent;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .nav_section_list li:active{
+    border-left: 10px solid blue;
+  }
+
+  .nav_section_list a{
+    text-decoration: none;
+    color: black;
+
+  }
+
+  .nav_section_list a:hover{
+    color: white;
+  }
+
+  .logo a{
+    text-decoration: none;
+    color: black;
+
+  }
