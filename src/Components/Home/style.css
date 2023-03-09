@@ -36,10 +36,21 @@
   }
 
   .balance_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     grid-column-start: 1;  
     grid-column-end: 3;
   }
+  .balance_info p {
+    font-size: 1.5rem;
+    margin: 0px;
+  }
 
+  .balance_info h3 {
+    margin: 0px;
+    color: green;
+  }
   .user_info {
     display: flex;
     justify-content: space-between;

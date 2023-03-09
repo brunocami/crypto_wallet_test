@@ -99,11 +99,28 @@ h2 {
 .wallet_url {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 90%;
     background-color: #4646468e;
     border-radius: 4px;
     margin: auto;
     padding: 0px 5px;
+}
+
+.wallet_url p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.wallet_url button {
+    background-color: transparent;
+    border: none;
+}
+
+.wallet_url button:hover {
+    cursor: pointer;
+    background-color: black;
 }
 
 .button-wrapper {

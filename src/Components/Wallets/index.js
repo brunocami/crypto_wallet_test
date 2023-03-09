@@ -1,75 +1,92 @@
 import React, { useState, useEffect } from 'react'
 import { BiWallet, BiCopy } from 'react-icons/bi'
-import './style.css'
+import './style.css';
+import { IconContext } from "react-icons";
 
-function Wallet() {
+function Wallet(props) {
 
   const [wallet, setWallet] = useState({
+    wallet_1: {
+      name: 'Wallet 1',
+      address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+      crypto_balance: {
+        bitcoin: 1.345,
+        ethereum: 11.342,
+        ripple: 104.567
+      },
+      balance: 0,
+    }
+  });
+
+  const [prices, SetPrices] = useState({
     bitcoin: 0,
     ethereum: 0,
-    ripple: 0
+    ripple: 0,
   });
 
   useEffect(() => {
     const fetchPrices = async () => {
       const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Cripple&vs_currencies=usd');
       const prices = await response.json();
-      setWallet(prevState => ({
-        ...prevState,
-        bitcoin: prevState.bitcoin + 0.5,
-        ethereum: prevState.ethereum + 2,
-        ripple: prevState.ripple + 500,
-        bitcoinPrice: prices.bitcoin.usd,
-        ethereumPrice: prices.ethereum.usd,
-        ripplePrice: prices.ripple.usd
-      }));
+      SetPrices({
+        bitcoin: prices.bitcoin.usd,
+        ethereum: prices.ethereum.usd,
+        ripple: prices.ripple.usd
+      })
+      props.SetTotalBalance((wallet.wallet_1.crypto_balance.bitcoin * prices.bitcoin.usd) + (wallet.wallet_1.crypto_balance.ethereum * prices.ethereum.usd) + (wallet.wallet_1.crypto_balance.ripple * prices.ripple.usd))
     };
 
-    const intervalId = setInterval(fetchPrices, 5000);
+    fetchPrices()
 
-    return () => clearInterval(intervalId);
   }, []);
 
-  const handleBuy = (crypto) => {
-    setWallet(prevState => ({
-      ...prevState,
-      [crypto]: prevState[crypto] + 1
-    }));
-  };
+  // const handleBuy = (crypto) => {
+  //   setWallet(prevState => ({
+  //     ...prevState,
+  //     [crypto]: prevState[crypto] + 1
+  //   }));
+  // };
 
-  const handleSell = (crypto) => {
-    if (wallet[crypto] > 0) {
-      setWallet(prevState => ({
-        ...prevState,
-        [crypto]: prevState[crypto] - 1
-      }));
-    }
+  // const handleSell = (crypto) => {
+  //   if (wallet[crypto] > 0) {
+  //     setWallet(prevState => ({
+  //       ...prevState,
+  //       [crypto]: prevState[crypto] - 1
+  //     }));
+  //   }
+  // };
+
+  const copyToClipboard = (text) => {
+    var input = document.createElement('textarea');
+    input.innerHTML = text;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+    alert('Text has been copied to clipboard!');
   };
 
   return (
     <div className='wallet_container'>
-      <h1><BiWallet/> My Crypto Wallet</h1>
+      <h1><BiWallet /> My Crypto Wallet</h1>
       <div className='wallet_card_container'>
 
 
         <div className="card_container">
           <div className="wrapper">
             <div className="banner-image-bitcoin"> </div>
-            <h2>Bitcoin Wallet</h2>
-            <p>Amount {wallet.bitcoin.toFixed(2)}</p>
-            <p>Value (USD) {(wallet.bitcoin * wallet.bitcoinPrice).toFixed(2)}</p>
+            <h2>{wallet.wallet_1.name}</h2>
+            <p>balance {((wallet.wallet_1.crypto_balance.bitcoin * prices.bitcoin) + (wallet.wallet_1.crypto_balance.ethereum * prices.ethereum) + (wallet.wallet_1.crypto_balance.ripple * prices.ripple)).toFixed(2)}</p>
             <div className='wallet_url'>
-              <p>1A1zP1eP5QGefi2D...</p>
-              <p><BiCopy/></p>
+              <p>{wallet.wallet_1.address}</p>
+              <IconContext.Provider value={{ color: 'white' }}>
+                <button onClick={() => copyToClipboard(wallet.wallet_1.address)}><BiCopy /></button>
+              </IconContext.Provider>
             </div>
           </div>
-          {/* <div className="button-wrapper">
-            <button className="btn fill" onClick={() => handleBuy('bitcoin')}>BUY</button>
-            <button className="btn outline" onClick={() => handleSell('bitcoin')}>SELL</button>
-          </div> */}
         </div>
 
-        <div className="card_container">
+        {/* <div className="card_container">
           <div className="wrapper">
             <div className="banner-image-ethereum"> </div>
             <h2>Ethereum Wallet</h2>
@@ -80,10 +97,6 @@ function Wallet() {
               <p><BiCopy/></p>
             </div>
           </div>
-          {/* <div className="button-wrapper">
-            <button className="btn fill" onClick={() => handleBuy('ethereum')}>BUY</button>
-            <button className="btn outline" onClick={() => handleSell('ethereum')}>SELL</button>
-          </div> */}
         </div>
 
         <div className="card_container">
@@ -97,26 +110,13 @@ function Wallet() {
               <p><BiCopy/></p>
             </div>
           </div>
-          {/* <div className="button-wrapper">
-            <button className="btn fill" onClick={() => handleBuy('ripple')}>BUY</button>
-            <button className="btn outline" onClick={() => handleSell('ripple')}>SELL</button>
-          </div> */}
-        </div>
+        </div> */}
 
       </div>
     </div>
   );
 }
-// return (
-//   <div >
-//     <div className='wallet_text'>
-//       <h1><BiWallet/>My Wallet</h1>
-//     </div>     
-//     <div className='wallet_card_container'>
-//       <div className='wallet_card'></div>
-//     </div>
-//   </div>
-// )
+
 
 
 export default Wallet
