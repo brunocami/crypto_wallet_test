@@ -8,7 +8,7 @@ import './style.css'
 
 const Home = () => {
 
-  const [balance, SetBalance] = useState(0);
+  const [balance, SetBalance] = useState(4);
   useEffect(() => {
     localStorage.setItem('balance', JSON.stringify(balance));
   }, []);

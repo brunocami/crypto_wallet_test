@@ -5,9 +5,10 @@ import { IconContext } from "react-icons";
 
 function Wallet(props) {
 
-  const [wallet, setWallet] = useState({
-    wallet_1: {
+  const [wallets, setWallet] = useState(JSON.parse(localStorage.getItem('wallets')) || [
+    {
       name: 'Wallet 1',
+      id: 1,
       address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
       crypto_balance: {
         bitcoin: 1.345,
@@ -16,8 +17,7 @@ function Wallet(props) {
       },
       balance: 0,
     }
-  });
-
+  ]);
   const [prices, SetPrices] = useState({
     bitcoin: 0,
     ethereum: 0,
@@ -33,12 +33,13 @@ function Wallet(props) {
         ethereum: prices.ethereum.usd,
         ripple: prices.ripple.usd
       })
-      props.SetTotalBalance((wallet.wallet_1.crypto_balance.bitcoin * prices.bitcoin.usd) + (wallet.wallet_1.crypto_balance.ethereum * prices.ethereum.usd) + (wallet.wallet_1.crypto_balance.ripple * prices.ripple.usd))
+      props.SetTotalBalance((wallets[0].crypto_balance.bitcoin * prices.bitcoin.usd) + (wallets[0].crypto_balance.ethereum * prices.ethereum.usd) + (wallets[0].crypto_balance.ripple * prices.ripple.usd))
     };
 
     fetchPrices()
 
   }, []);
+
 
   // const handleBuy = (crypto) => {
   //   setWallet(prevState => ({
@@ -56,6 +57,35 @@ function Wallet(props) {
   //   }
   // };
 
+  const updateLocalStorage = (wallets) => {
+    localStorage.setItem('wallets', JSON.stringify(wallets));
+  };
+
+  function addNewWallet() {
+    const newWallet = {
+      name: `Wallet ${wallets.length + 1}`,
+      id: wallets.length + 1,
+      address: '',
+      crypto_balance: {
+        bitcoin: 0,
+        ethereum: 0,
+        ripple: 0
+      },
+      balance: 0
+    };
+    setWallet(prevState => [...prevState, newWallet]);
+    // Save wallet to localStorage
+    updateLocalStorage([...wallets, newWallet]);
+  }
+
+  function deleteWallet(index) {
+    const updatedWallets = [...wallets];
+    updatedWallets.splice(index, 1);
+    setWallet(prevState => prevState.filter((_, i) => i !== index));
+    updateLocalStorage(updatedWallets);
+
+  }
+
   const copyToClipboard = (text) => {
     var input = document.createElement('textarea');
     input.innerHTML = text;
@@ -66,51 +96,32 @@ function Wallet(props) {
     alert('Text has been copied to clipboard!');
   };
 
+
+
   return (
     <div className='wallet_container'>
       <h1><BiWallet /> My Crypto Wallet</h1>
       <div className='wallet_card_container'>
 
 
-        <div className="card_container">
-          <div className="wrapper">
-            <div className="banner-image-bitcoin"> </div>
-            <h2>{wallet.wallet_1.name}</h2>
-            <p>balance {((wallet.wallet_1.crypto_balance.bitcoin * prices.bitcoin) + (wallet.wallet_1.crypto_balance.ethereum * prices.ethereum) + (wallet.wallet_1.crypto_balance.ripple * prices.ripple)).toFixed(2)}</p>
-            <div className='wallet_url'>
-              <p>{wallet.wallet_1.address}</p>
-              <IconContext.Provider value={{ color: 'white' }}>
-                <button onClick={() => copyToClipboard(wallet.wallet_1.address)}><BiCopy /></button>
-              </IconContext.Provider>
+        {wallets.map((wallet, index) => (
+          <div className="card_container" key={index}>
+            <div className="wrapper">
+              <div className="banner-image-bitcoin"> </div>
+              <h2>{wallet.name}</h2>
+              <p>balance {((wallet.crypto_balance.bitcoin * prices.bitcoin) + (wallet.crypto_balance.ethereum * prices.ethereum) + (wallet.crypto_balance.ripple * prices.ripple)).toFixed(2)}</p>
+              <div className='wallet_url'>
+                <p>{wallet.address}</p>
+                <IconContext.Provider value={{ color: 'white' }}>
+                  <button onClick={() => copyToClipboard(wallet.address)}><BiCopy /></button>
+                </IconContext.Provider>
+              </div>
             </div>
+            <button onClick={() => deleteWallet(index)}>Delete</button>
           </div>
-        </div>
+        ))}
 
-        {/* <div className="card_container">
-          <div className="wrapper">
-            <div className="banner-image-ethereum"> </div>
-            <h2>Ethereum Wallet</h2>
-            <p>Amount {wallet.ethereum.toFixed(2)}</p>
-            <p>Value (USD) {(wallet.ethereum * wallet.ethereumPrice).toFixed(2)}</p>
-            <div className='wallet_url'>
-              <p>1A1zP1eP5QGefi2D...</p>
-              <p><BiCopy/></p>
-            </div>
-          </div>
-        </div>
-
-        <div className="card_container">
-          <div className="wrapper">
-            <div className="banner-image-ripple"> </div>
-            <h2>Ripple Wallet</h2>
-            <p>Amount {wallet.ripple.toFixed(2)}</p>
-            <p>Value (USD) {(wallet.ripple * wallet.ripplePrice).toFixed(2)}</p>
-            <div className='wallet_url'>
-              <p>1A1zP1eP5QGefi2D...</p>
-              <p><BiCopy/></p>
-            </div>
-          </div>
-        </div> */}
+        <button onClick={addNewWallet}>Create New Wallet + </button>
 
       </div>
     </div>
