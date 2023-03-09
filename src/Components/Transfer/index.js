@@ -9,14 +9,12 @@ function Transfer() {
   const [cryptocurrencies, setCryptocurrencies] = useState([]);
   const [cryptoToTransferFrom, SetCryptoToTransferFrom] = useState('bitcoin');
   const [cryptoToTransferTo, SetCryptoToTransferTo] = useState('ethereum');
-  const [transferAmount, SetTransferAmount] = useState(0);
-  const [transferAddress, setTransferAddress] = useState('')
   const [transferInfo, SetTransferInfo] = useState({
     tranferFrom: cryptoToTransferFrom,
     transferTo: cryptoToTransferTo,
-    amount: transferAmount,
-    address: transferAddress
-  })
+    amount: 0,
+    address: ''
+  });
 
   useEffect(() => {
     axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=5&page=1')
@@ -46,7 +44,6 @@ function Transfer() {
   const handleTransfer = async () => {
     try {
       localStorage.setItem('transferInfo', JSON.stringify(transferInfo));
-      console.log(transferInfo);
       alert('Coin transfer successful!');
     } catch (error) {
       console.error(error);
@@ -109,7 +106,7 @@ function Transfer() {
           </div>
           <div className="send_amount_container">
             <div className="webflow-style-input">
-              <input type="number" onChange={(event) => SetTransferInfo({ ...transferInfo, amount: event.target.value })} />
+              <input type="number" placeholder='0.000' onChange={(event) => SetTransferInfo({ ...transferInfo, amount: event.target.value })} />
               <span>{cryptoToTransferFrom}</span>
             </div>
 
