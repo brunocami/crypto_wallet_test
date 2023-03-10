@@ -7,16 +7,15 @@ import './style.css'
 function Sidebar() {
     return (
         <>
-            <IconContext.Provider value={{ size: '50px' }}>
-                <div className='logo'>
+            <div className='logo'>
+                <IconContext.Provider value={{ size: '50px' }}>
                     <Link to='/'>
                         <DiBrackets />
                     </Link>
-                </div>
-            </IconContext.Provider>
+                </IconContext.Provider>
+            </div>
             <ul className='nav_section_list'>
-                <li><Link to='/'>Dashboard</Link></li>
-                <li><Link to='/mywallet'>My Wallet</Link></li>
+                <li><Link to='/'>My Wallet</Link></li>
                 <li><Link to='/transfer'>Transfer Coin</Link></li>
             </ul>
         </>

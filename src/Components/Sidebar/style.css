@@ -16,10 +16,6 @@
     text-decoration: none;
   }
 
-  .nav_section_list li:active{
-    border-left: 10px solid blue;
-  }
-
   .nav_section_list a{
     text-decoration: none;
     color: black;
@@ -33,5 +29,17 @@
   .logo a{
     text-decoration: none;
     color: black;
+  }
 
+  @media screen and (max-width: 768px) {
+    .nav_section_list {
+      flex-direction: row;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      margin: 0;
+    }
+    .logo a{
+      display: none;
+    }
   }
