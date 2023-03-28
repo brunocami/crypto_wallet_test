@@ -81,9 +81,9 @@ const Home = () => {
 
       <div className="nav_section_3">
         <Routes>
-          <Route exact path="/" element={<Wallet setWallet={setWallet} wallets={wallets} prices={prices} />} />
-          <Route exact path="/transfer" element={<Transfer />} />
-          <Route exact path="/wallet/:id" element={<WalletDetails wallets={wallets} prices={prices} setWallet={setWallet}/>} />
+          <Route exact path="/crypto_wallet_test/" element={<Wallet setWallet={setWallet} wallets={wallets} prices={prices} />} />
+          <Route exact path="/crypto_wallet_test/transfer" element={<Transfer />} />
+          <Route exact path="/crypto_wallet_test/wallet/:id" element={<WalletDetails wallets={wallets} prices={prices} setWallet={setWallet}/>} />
         </Routes>
       </div>
     </nav>
