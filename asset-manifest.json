@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/crypto_wallet_test/static/css/main.2c2633c2.css",
+    "main.js": "/crypto_wallet_test/static/js/main.23cedbc1.js",
+    "static/media/Ripple-Logo.png": "/crypto_wallet_test/static/media/Ripple-Logo.664d9a77be029b24670c.png",
+    "static/media/Ethereum-Logo.png": "/crypto_wallet_test/static/media/Ethereum-Logo.7efcceea06b17a0b4193.png",
+    "static/media/Bitcoin-Logo.png": "/crypto_wallet_test/static/media/Bitcoin-Logo.f7d50142982510f3d756.png",
+    "index.html": "/crypto_wallet_test/index.html",
+    "main.2c2633c2.css.map": "/crypto_wallet_test/static/css/main.2c2633c2.css.map",
+    "main.23cedbc1.js.map": "/crypto_wallet_test/static/js/main.23cedbc1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2c2633c2.css",
+    "static/js/main.23cedbc1.js"
+  ]
+}
